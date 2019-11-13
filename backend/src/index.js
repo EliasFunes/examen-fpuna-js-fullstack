@@ -24,7 +24,6 @@ app.use(cors());
 //routes
 app.use('/api/empleados', require('./routes/empleados.routes'));
 
-
 //Starting the server
 const server = app.listen(app.get('port'), ()=> {
     console.log(`App listening port ${app.get('port')}`);

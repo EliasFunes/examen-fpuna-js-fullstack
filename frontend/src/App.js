@@ -11,6 +11,7 @@ import axios from 'axios';
 
 import Navbar from './components/Navbar';
 import Empleados from "./components/Empleados";
+import CompleteList from "./components/CompleteList";
 
 const socket = io.connect('http://localhost:8000')
 axios.defaults.baseURL = "http://localhost:8000"
@@ -21,6 +22,7 @@ function App() {
         <Router>
           <Navbar />
           <Switch>
+            <Route exact path="/" component={() => <CompleteList axios={axios} socket={socket}/>}/>
             <Route exact path="/empleados" component={() => <Empleados axios={axios} socket={socket}/>}/>
 
           </Switch>

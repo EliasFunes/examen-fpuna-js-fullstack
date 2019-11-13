@@ -15,7 +15,6 @@ export default class Empleados extends Component {
             tipo: 'M',
             fechaIngreso: '',
             _id: '',
-            // editing: false,
             axios: this.props.axios,
             socket: this.props.socket,
             editing: false,
@@ -219,23 +218,25 @@ export default class Empleados extends Component {
                                 {
                                     this.state.empleados.map(empleado => {
                                         let nombreCompleto = empleado.nombres + ' '+ empleado.apellidos
-                                        return (
-                                            <tr key={empleado._id}>
-                                                <td>{nombreCompleto}</td>
-                                                <td>{empleado.cargo}</td>
-                                                <td>{empleado.salarioBase}</td>
-                                                <td>{empleado.salarioPorDia}</td>
-                                                <td>{empleado.salarioPorHora}</td>
-                                                <td>
-                                                    <button className="btn btn-primary btn-sm">
-                                                        <i className="material-icons" onClick={() => this.updateEmpleado(empleado._id)}>edit</i>
-                                                    </button>
-                                                    <button className="btn btn-danger btn-sm" style={{ margin: '4px' }}>
-                                                        <i className="material-icons" onClick={() => this.deleteEmpleado(empleado._id)}>delete</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        )
+                                        if(empleado.activo){
+                                            return (
+                                                <tr key={empleado._id}>
+                                                    <td>{nombreCompleto}</td>
+                                                    <td>{empleado.cargo}</td>
+                                                    <td>{empleado.salarioBase}</td>
+                                                    <td>{empleado.salarioPorDia}</td>
+                                                    <td>{empleado.salarioPorHora}</td>
+                                                    <td>
+                                                        <button className="btn btn-primary btn-sm">
+                                                            <i className="material-icons" onClick={() => this.updateEmpleado(empleado._id)}>edit</i>
+                                                        </button>
+                                                        <button className="btn btn-danger btn-sm" style={{ margin: '4px' }}>
+                                                            <i className="material-icons" onClick={() => this.deleteEmpleado(empleado._id)}>delete</i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }
                                     })
                                 }
                             </tbody>
