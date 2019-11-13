@@ -31,25 +31,15 @@ const server = app.listen(app.get('port'), ()=> {
 });
 
 
-// const io = SocketIo(server);
+const io = SocketIo(server);
 
-/*
 io.on('connection', (socket) => {
-    socket.on('fetchProductos', async () => {
+    socket.on('fetchEmpleados', async () => {
         try {
-            const res = await axios.get('http://localhost:4000/api/productos');
-            await socket.emit('Productos', res.data)
+            const res = await axios.get('http://localhost:8000/api/empleados');
+            io.sockets.emit('Empleados', res.data);
         } catch (error) {
-            console.log('Error')
+            console.log('Error');
         }
     });
-
-    socket.on('fetchCompras', async () => {
-        try {
-            const res = await axios.get('http://localhost:4000/api/compras');
-            await socket.emit('Compras', res.data)
-        } catch (error) {
-            console.log('Error')
-        }
-    });
-});*/
+});

@@ -1,8 +1,7 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-import 'bootstrap/dist/css/bootstrap-grid.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'react-notifications/lib/notifications.css';
 
@@ -10,25 +9,23 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import io from 'socket.io-client';
 import axios from 'axios';
 
+import Navbar from './components/Navbar';
+import Empleados from "./components/Empleados";
+
+const socket = io.connect('http://localhost:8000')
+axios.defaults.baseURL = "http://localhost:8000"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/empleados" component={() => <Empleados axios={axios} socket={socket}/>}/>
+
+          </Switch>
+        </Router>
+      </div>
   );
 }
 
