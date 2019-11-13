@@ -18,6 +18,7 @@ export default class Empleados extends Component {
             // editing: false,
             axios: this.props.axios,
             socket: this.props.socket,
+            editing: false,
             empleados: []
         }
     }
@@ -44,28 +45,85 @@ export default class Empleados extends Component {
 
         try {
 
-            const res = await this.state.axios.post('/api/empleados', empleado);
-            if (res.data.success) {
-                NotificationManager.success(res.data.message, 'Empleado')
-                this.setState({
-                    nombres: '',
-                    apellidos: '',
-                    domicilio: '',
-                    telefono: '',
-                    ci: '',
-                    salarioBase: 0,
-                    cargo: '',
-                    tipo: 'M',
-                    fechaIngreso: '',
-                });
-                this.fetchEmpleados();
-                document.getElementById('form').reset();
-            } else {
-                NotificationManager.error(res.data.message, 'Empleado');
-            }
+            if (this.state.editing) {
 
+                const res = await this.state.axios.put('/api/empleados/' + this.state._id, empleado);
+                if (res.data.success) {
+                    NotificationManager.success(res.data.message, 'Empleado');
+                    this.setState({
+                        nombres: '',
+                        apellidos: '',
+                        domicilio: '',
+                        telefono: '',
+                        ci: '',
+                        salarioBase: 0,
+                        cargo: '',
+                        tipo: 'M',
+                        fechaIngreso: '',
+                        editing: false
+                    });
+                    this.fetchEmpleados();
+                    document.getElementById('form').reset();
+                } else {
+                    NotificationManager.error(res.data.message, 'Empleado')
+                }
+
+            } else {
+                const res = await this.state.axios.post('/api/empleados', empleado);
+                if (res.data.success) {
+                    NotificationManager.success(res.data.message, 'Empleado')
+                    this.setState({
+                        nombres: '',
+                        apellidos: '',
+                        domicilio: '',
+                        telefono: '',
+                        ci: '',
+                        salarioBase: 0,
+                        cargo: '',
+                        tipo: 'M',
+                        fechaIngreso: '',
+                    });
+                    this.fetchEmpleados();
+                    document.getElementById('form').reset();
+                } else {
+                    NotificationManager.error(res.data.message, 'Empleado');
+                }
+            }
         } catch (error) {
             NotificationManager.error('Ocurrió un error', 'Error');
+        }
+    }
+
+    async updateEmpleado(id) {
+        try {
+            const res = await this.state.axios.get('/api/empleados/' + id)
+            this.setState({
+                nombres: res.data.nombres,
+                apellidos: res.data.apellidos,
+                domicilio: res.data.domicilio,
+                telefono: res.data.telefono,
+                ci: res.data.ci,
+                salarioBase: res.data.salarioBase,
+                cargo: res.data.cargo,
+                tipo: res.data.tipo,
+                fechaIngreso: res.data.fechaIngreso,
+                _id: res.data._id,
+                editing: true
+            })
+        } catch (error) {
+            console.log('Error')
+        }
+    }
+
+    async deleteEmpleado(id) {
+        try {
+            const res = await this.state.axios.delete('/api/empleados/' + id);
+            if(res.data.success){
+                NotificationManager.success(res.data.message, 'Empleado');
+                this.fetchEmpleados();
+            }
+        } catch (error) {
+            console.log('Error');
         }
     }
 
@@ -146,7 +204,7 @@ export default class Empleados extends Component {
                     </div>
 
                     <div className="col-sm-8">
-                        <table className="table">
+                        <table className="table table-hover">
                             <thead className="thead-dark">
                             <tr>
                                 <th scope="col">Nombres y Apellidos</th>
@@ -154,6 +212,7 @@ export default class Empleados extends Component {
                                 <th scope="col">Salario Base</th>
                                 <th scope="col">Salario por dia</th>
                                 <th scope="col">Salario por hora</th>
+                                <th scope="col">Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -167,6 +226,14 @@ export default class Empleados extends Component {
                                                 <td>{empleado.salarioBase}</td>
                                                 <td>{empleado.salarioPorDia}</td>
                                                 <td>{empleado.salarioPorHora}</td>
+                                                <td>
+                                                    <button className="btn btn-primary btn-sm">
+                                                        <i className="material-icons" onClick={() => this.updateEmpleado(empleado._id)}>edit</i>
+                                                    </button>
+                                                    <button className="btn btn-danger btn-sm" style={{ margin: '4px' }}>
+                                                        <i className="material-icons" onClick={() => this.deleteEmpleado(empleado._id)}>delete</i>
+                                                    </button>
+                                                </td>
                                             </tr>
                                         )
                                     })

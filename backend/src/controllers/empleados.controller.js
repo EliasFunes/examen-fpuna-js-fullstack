@@ -5,7 +5,7 @@ module.exports = {
     /*GET All*/
     async getAllEmpleados(req, res){
         try {
-            const empleados = await EmpleadoModel.find();
+            const empleados = await EmpleadoModel.find({activo:true});
             res.json(empleados);
         } catch (error) {
             res.json({
