@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import InputMask from 'react-input-mask';
+import NumberFormat from "react-number-format";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
 
 export default class Empleados extends Component {
     constructor(props) {
@@ -148,58 +152,66 @@ export default class Empleados extends Component {
             <div className="container py-5">
                 <div className="row">
                     <div className="col-sm-4">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Formulario de Empleados</h5>
-                                <form id="form" onSubmit={this.handleSubmit}>
-                                    <div className="row">
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="nombre">Nombres del empleado</label>
-                                            <input type="text" name="nombres" id="nombres" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese los nombres del empleado" onChange={this.handleChange} value={this.state.nombres} />
+                        <form id="form" onSubmit={this.handleSubmit}>
+                            <div className="card">
+                                <div className="card-header">
+                                    <h5 className="card-title">Formulario de Empleados</h5>
+                                </div>
+                                <div className="card-body">
+
+                                        <div className="row">
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="nombre">Nombres del empleado</label>
+                                                <input type="text" name="nombres" id="nombres" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese los nombres del empleado" onChange={this.handleChange} value={this.state.nombres} />
+                                            </div>
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="nombre">Apellidos del empleado</label>
+                                                <input type="text" name="apellidos" id="apellidos" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese los apellidos del empleado" onChange={this.handleChange} value={this.state.apellidos} />
+                                            </div>
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="domicilio">Domicilio</label>
+                                                <input type="text" name="domicilio" id="domicilio" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el domicilio del empleado" onChange={this.handleChange} value={this.state.domicilio} />
+                                            </div>
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="telefono">Telefono</label>
+                                                <input type="text" name="telefono" id="telefono" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el telefono del empleado" onChange={this.handleChange} value={this.state.telefono} />
+                                            </div>
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="ci">Nro. Documento</label>
+                                                <input type="text" name="ci" id="ci" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el Nro. Doc. del empleado" onChange={this.handleChange} value={this.state.ci} />
+                                            </div>
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="salarioBase">Salario base</label>
+                                                <input type="number" name="salarioBase" id="salarioBase" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el salario base del empleado" onChange={this.handleChange} value={this.state.salarioBase} required/>
+                                            </div>
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="cargo">Cargo</label>
+                                                <input type="text" name="cargo" id="cargo" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el cargo del empleado" onChange={this.handleChange} value={this.state.cargo} />
+                                            </div>
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="tipo">Tipo</label>
+                                                <select name="tipo" id="tipo" className="form-control form-control-sm" required onChange={this.handleChange} value={this.state.tipo}>
+                                                    <option value="M" checked>Mensualero</option>
+                                                    <option value="J">Jornalero</option>
+                                                    <option value="C">Changarin</option>
+                                                </select>
+                                            </div>
+                                            <div className="form-group col-sm-12">
+                                                <label htmlFor="fechaIngreso">Fecha Ingreso</label>
+                                                <InputMask mask="99/99/9999" type="text" name="fechaIngreso" id="fechaIngreso" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese fecha de ingreso del empleado" onChange={this.handleChange} value={this.state.fechaIngreso} />
+                                            </div>
                                         </div>
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="nombre">Apellidos del empleado</label>
-                                            <input type="text" name="apellidos" id="apellidos" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese los apellidos del empleado" onChange={this.handleChange} value={this.state.apellidos} />
-                                        </div>
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="domicilio">Domicilio</label>
-                                            <input type="text" name="domicilio" id="domicilio" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el domicilio del empleado" onChange={this.handleChange} value={this.state.domicilio} />
-                                        </div>
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="telefono">Telefono</label>
-                                            <input type="text" name="telefono" id="telefono" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el telefono del empleado" onChange={this.handleChange} value={this.state.telefono} />
-                                        </div>
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="ci">Nro. Documento</label>
-                                            <input type="text" name="ci" id="ci" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el Nro. Doc. del empleado" onChange={this.handleChange} value={this.state.ci} />
-                                        </div>
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="salarioBase">Salario base</label>
-                                            <input type="number" name="salarioBase" id="salarioBase" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el salario base del empleado" onChange={this.handleChange} value={this.state.salarioBase} />
-                                        </div>
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="cargo">Cargo</label>
-                                            <input type="text" name="cargo" id="cargo" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese el cargo del empleado" onChange={this.handleChange} value={this.state.cargo} />
-                                        </div>
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="tipo">Tipo</label>
-                                            <select name="tipo" id="tipo" className="form-control form-control-sm" required onChange={this.handleChange} value={this.state.tipo}>
-                                                <option value="M" checked>Mensualero</option>
-                                                <option value="J">Jornalero</option>
-                                                <option value="C">Changarin</option>
-                                            </select>
-                                        </div>
-                                        <div className="form-group col-sm-10">
-                                            <label htmlFor="fechaIngreso">Fecha Ingreso</label>
-                                            <input type="text" name="fechaIngreso" id="fechaIngreso" className="form-control form-control-sm" autoComplete="off" required placeholder="Ingrese fecha de ingreso del empleado" onChange={this.handleChange} value={this.state.fechaIngreso} />
-                                        </div>
-                                        <div className="form-group col-sm-10">
-                                            <button type="submit" className="btn btn-primary btn-sm">Guardar</button>
-                                        </div>
+
+                                </div>
+                                <div className="card-footer">
+                                    <div className="form-group col-sm-12">
+                                        <button type="submit" className="btn btn-success btn-sm fa-pull-right">
+                                            <FontAwesomeIcon icon={faSave} /> Guardar
+                                        </button>
                                     </div>
-                                </form>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
 
                     <div className="col-sm-8">
@@ -211,7 +223,7 @@ export default class Empleados extends Component {
                                 <th scope="col">Salario Base</th>
                                 <th scope="col">Salario por dia</th>
                                 <th scope="col">Salario por hora</th>
-                                <th scope="col">Acciones</th>
+                                <th scope="col" colSpan={2}>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -223,15 +235,35 @@ export default class Empleados extends Component {
                                                 <tr key={empleado._id}>
                                                     <td>{nombreCompleto}</td>
                                                     <td>{empleado.cargo}</td>
-                                                    <td>{empleado.salarioBase}</td>
-                                                    <td>{empleado.salarioPorDia}</td>
-                                                    <td>{empleado.salarioPorHora}</td>
                                                     <td>
-                                                        <button className="btn btn-primary btn-sm">
-                                                            <i className="material-icons" onClick={() => this.updateEmpleado(empleado._id)}>edit</i>
+                                                        <NumberFormat displayType={"text"}
+                                                                      thousandSeparator={"."}
+                                                                      decimalSeparator={false}
+                                                                      value={empleado.salarioBase}>
+                                                        </NumberFormat>
+                                                    </td>
+                                                    <td>
+                                                        <NumberFormat displayType={"text"}
+                                                                      thousandSeparator={"."}
+                                                                      decimalSeparator={false}
+                                                                      value={empleado.salarioPorDia}>
+                                                        </NumberFormat>
+                                                    </td>
+                                                    <td>
+                                                        <NumberFormat displayType={"text"}
+                                                                      thousandSeparator={"."}
+                                                                      decimalSeparator={false}
+                                                                      value={empleado.salarioPorHora}>
+                                                        </NumberFormat>
+                                                    </td>
+                                                    <td>
+                                                        <button className="btn btn-primary btn-sm" onClick={() => this.updateEmpleado(empleado._id)}>
+                                                            <FontAwesomeIcon icon={faPen} />
                                                         </button>
-                                                        <button className="btn btn-danger btn-sm" style={{ margin: '4px' }}>
-                                                            <i className="material-icons" onClick={() => this.deleteEmpleado(empleado._id)}>delete</i>
+                                                    </td>
+                                                    <td>
+                                                        <button className="btn btn-danger btn-sm" onClick={() => this.deleteEmpleado(empleado._id)}>
+                                                            <FontAwesomeIcon icon={faTrash} />
                                                         </button>
                                                     </td>
                                                 </tr>

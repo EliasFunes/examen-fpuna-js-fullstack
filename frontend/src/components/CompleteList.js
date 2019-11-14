@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
+import NumberFormat from "react-number-format";
 
 export default class CompleteList extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export default class CompleteList extends Component {
             <div className="container container-fluid">
                 <div className="row">
                     <div className="col-sm-12">
-                        <table className="table table-hover">
+                        <table className="table table-hover table-bordered">
                             <thead className="thead-dark">
                             <tr>
                                 <th scope="col">Nro. Doc</th>
@@ -59,17 +60,59 @@ export default class CompleteList extends Component {
                                     }
                                     return (
                                         <tr key={empleado._id}>
-                                            <td>{empleado.ci}</td>
+                                            <td>
+                                                <NumberFormat displayType={"text"}
+                                                              thousandSeparator={"."}
+                                                              decimalSeparator={false}
+                                                              value={empleado.ci}>
+                                                </NumberFormat>
+                                            </td>
                                             <td>{nombreCompleto}</td>
                                             <td>{empleado.cargo}</td>
                                             <td>{empleado.tipo}</td>
                                             <td>{activo}</td>
-                                            <td>{empleado.salarioBase}</td>
-                                            <td>{empleado.salarioPorDia}</td>
-                                            <td>{empleado.salarioPorHora}</td>
-                                            <td>{empleado.al_50}</td>
-                                            <td>{empleado.al_30}</td>
-                                            <td>{empleado.al_100}</td>
+                                            <td>
+                                                <NumberFormat displayType={"text"}
+                                                              thousandSeparator={"."}
+                                                              decimalSeparator={false}
+                                                              value={empleado.salarioBase}>
+                                                </NumberFormat>
+                                            </td>
+                                            <td>
+                                                <NumberFormat displayType={"text"}
+                                                              thousandSeparator={"."}
+                                                              decimalSeparator={false}
+                                                              value={empleado.salarioPorDia}>
+                                                </NumberFormat>
+                                            </td>
+                                            <td>
+                                                <NumberFormat displayType={"text"}
+                                                              thousandSeparator={"."}
+                                                              decimalSeparator={false}
+                                                              value={empleado.salarioPorHora}>
+                                                </NumberFormat>
+                                            </td>
+                                            <td>
+                                                <NumberFormat displayType={"text"}
+                                                              thousandSeparator={"."}
+                                                              decimalSeparator={false}
+                                                              value={empleado.al_50}>
+                                                </NumberFormat>
+                                            </td>
+                                            <td>
+                                                <NumberFormat displayType={"text"}
+                                                              thousandSeparator={"."}
+                                                              decimalSeparator={false}
+                                                              value={empleado.al_100}>
+                                                </NumberFormat>
+                                            </td>
+                                            <td>
+                                                <NumberFormat displayType={"text"}
+                                                              thousandSeparator={"."}
+                                                              decimalSeparator={false}
+                                                              value={empleado.al_30}>
+                                                </NumberFormat>
+                                            </td>
                                         </tr>
                                     )
                                 })

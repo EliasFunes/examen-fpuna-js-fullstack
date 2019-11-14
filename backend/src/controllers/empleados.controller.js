@@ -118,9 +118,45 @@ module.exports = {
     },
 
     /*UPDATE*/
-    async updateEmpleado(req, res){
+    updateEmpleado: async function (req, res) {
+
+        const {
+            nombres,
+            apellidos,
+            ci,
+            salarioBase,
+            cargo,
+            tipo,
+            fechaIngreso,
+            domicilio,
+            telefono
+        } = req.body;
+
+        const salarioPorDia = Number(salarioBase / 30).toFixed(0);
+        const salarioPorHora = Number(salarioPorDia / 8).toFixed(0);
+        const al_50 = Number(Number(salarioPorHora) + (Number(salarioPorHora) * 0.5)).toFixed(0);
+        const al_100 = Number(salarioPorHora * 2).toFixed(0);
+        const al_30 = Number(Number(salarioPorHora) + (Number(salarioPorHora) * 0.3)).toFixed(0);
+
+        const toUpdateEmpleado = {
+            nombres,
+            apellidos,
+            ci,
+            salarioBase,
+            cargo,
+            tipo,
+            fechaIngreso,
+            domicilio,
+            telefono,
+            salarioPorDia,
+            salarioPorHora,
+            al_50,
+            al_100,
+            al_30
+        };
+
         try {
-            await EmpleadoModel.findByIdAndUpdate({_id: req.params.id}, req.body);
+            await EmpleadoModel.findByIdAndUpdate({_id: req.params.id}, toUpdateEmpleado);
             res.json({
                 success: true,
                 message: 'Empleado actualizado'

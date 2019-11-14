@@ -22,12 +22,11 @@ const EmpleadoSchema = new Schema({
 });
 
 EmpleadoSchema.pre('save', async function () {
-    //Todo: realizar los calculos aquí
     this.salarioPorDia = Number(this.salarioBase / 30).toFixed(0);
     this.salarioPorHora = Number(this.salarioPorDia / 8).toFixed(0);
-    this.al_50 = Number(this.salarioPorHora + (this.salarioPorHora*0.5)).toFixed(0);
+    this.al_50 = Number(Number(this.salarioPorHora) + (Number(this.salarioPorHora) * 0.5)).toFixed(0);
     this.al_100 = Number(this.salarioPorHora * 2).toFixed(0);
-    this.al_30 = Number(this.salarioPorHora + (this.salarioPorHora*0.3)).toFixed(0);
+    this.al_30 = Number(Number(this.salarioPorHora) + (Number(this.salarioPorHora) * 0.3)).toFixed(0);
 });
 
 module.exports = model('Empleado', EmpleadoSchema);
